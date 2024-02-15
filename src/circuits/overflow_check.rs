@@ -1,7 +1,7 @@
 use eth_types::Field;
 use halo2_proofs::{circuit::*, plonk::*};
 
-use super::super::chips::overflow_check::{OverFlowCheckConfig, OverFlowChip};
+use crate::chips::overflow_check::{OverFlowCheckConfig, OverFlowChip};
 
 #[derive(Default)]
 struct OverflowCheckCircuit<F: Field> {
@@ -62,9 +62,9 @@ impl<F: Field> Circuit<F> for OverflowCheckCircuit<F> {
 
 #[cfg(test)]
 mod tests {
-    use std::panic;
     use super::OverflowCheckCircuit;
     use halo2_proofs::{circuit::Value, dev::MockProver, halo2curves::bn256::Fr as Fp};
+    use std::panic;
     #[test]
     fn test_none_overflow_case() {
         let k = 4;

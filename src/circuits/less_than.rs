@@ -1,4 +1,4 @@
-use super::super::chips::less_than::{LessThanChip, LessThanConfig};
+use crate::chips::less_than::{LessThanChip, LessThanConfig};
 
 use halo2_proofs::{arithmetic::FieldExt, circuit::*, plonk::*};
 
@@ -51,9 +51,7 @@ mod tests {
         // initate value
         let value = Value::known(Fp::from(755));
 
-        let circuit = MyCircuit::<Fp> {
-            input: value
-        };
+        let circuit = MyCircuit::<Fp> { input: value };
 
         let target = 800;
 
@@ -78,6 +76,5 @@ mod tests {
         let invalid_prover = MockProver::run(k, &circuit, vec![pub_inputs_2]).unwrap();
 
         assert!(invalid_prover.verify().is_err());
-
     }
 }

@@ -1,7 +1,7 @@
 use eth_types::Field;
 use halo2_proofs::{circuit::*, plonk::*};
 
-use super::super::chips::overflow_check_v2::{OverflowCheckV2Config, OverflowChipV2};
+use crate::chips::overflow_check_v2::{OverflowCheckV2Config, OverflowChipV2};
 // use crate::chips::utils::{decompose_bigInt_to_ubits, value_f_to_big_uint};
 
 #[derive(Default)]

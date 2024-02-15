@@ -1,4 +1,4 @@
-use super::super::chips::inclusion_check::{InclusionCheckChip, InclusionCheckConfig};
+use crate::chips::inclusion_check::{InclusionCheckChip, InclusionCheckConfig};
 
 use halo2_proofs::{arithmetic::FieldExt, circuit::*, plonk::*};
 

@@ -2,7 +2,7 @@ use eth_types::Field;
 
 use halo2_proofs::{circuit::*, plonk::*};
 
-use super::super::chips::add_carry_v2::{AddCarryV2Chip, AddCarryV2Config};
+use crate::chips::add_carry_v2::{AddCarryV2Chip, AddCarryV2Config};
 
 #[derive(Default)]
 struct AddCarryCircuit<F: Field> {
@@ -25,7 +25,12 @@ impl<F: Field> Circuit<F> for AddCarryCircuit<F> {
         let carry_selector = meta.complex_selector();
         let instance = meta.instance_column();
 
-        AddCarryV2Chip::configure(meta, [col_a, col_b_inv, col_b, col_c], carry_selector, instance)
+        AddCarryV2Chip::configure(
+            meta,
+            [col_a, col_b_inv, col_b, col_c],
+            carry_selector,
+            instance,
+        )
     }
 
     fn synthesize(
@@ -36,8 +41,12 @@ impl<F: Field> Circuit<F> for AddCarryCircuit<F> {
         let chip = AddCarryV2Chip::construct(config);
 
         let (prev_b, prev_c) = chip.assign_first_row(layouter.namespace(|| "load first row"))?;
-        let (b, c) =
-            chip.assign_advice_row(layouter.namespace(|| "load row"), self.a, prev_b.clone(), prev_c.clone())?;
+        let (b, c) = chip.assign_advice_row(
+            layouter.namespace(|| "load row"),
+            self.a,
+            prev_b.clone(),
+            prev_c.clone(),
+        )?;
 
         // check computation result
         chip.expose_public(layouter.namespace(|| "carry check"), &b, 2)?;
@@ -55,11 +64,16 @@ mod tests {
         let k = 4;
 
         // a: new value
-        // public_input[0]: x * 2^16 
+        // public_input[0]: x * 2^16
         // public_input[1]: x * 2^0
-        // 
-        let a = Value::known(Fp::from(1)); 
-        let public_inputs = vec![Fp::from(0), Fp::from((1 << 16) - 2), Fp::from(0), Fp::from((1 << 16) - 1)]; // initial accumulated values
+        //
+        let a = Value::known(Fp::from(1));
+        let public_inputs = vec![
+            Fp::from(0),
+            Fp::from((1 << 16) - 2),
+            Fp::from(0),
+            Fp::from((1 << 16) - 1),
+        ]; // initial accumulated values
 
         let circuit = AddCarryCircuit { a };
         let prover = MockProver::run(k, &circuit, vec![public_inputs.clone()]).unwrap();

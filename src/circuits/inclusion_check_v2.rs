@@ -1,4 +1,4 @@
-use super::super::chips::inclusion_check_v2::{InclusionCheckV2Chip, InclusionCheckV2Config};
+use crate::chips::inclusion_check_v2::{InclusionCheckV2Chip, InclusionCheckV2Config};
 
 use halo2_proofs::{arithmetic::FieldExt, circuit::*, plonk::*};
 
@@ -25,10 +25,9 @@ impl<F: FieldExt> Circuit<F> for MyCircuit<F> {
         let col_username_accumulator = meta.advice_column();
         let col_balance_accumulator = meta.advice_column();
         let instance = meta.instance_column();
-                
+
         // Create a fixed column to load constants.
         let constant = meta.fixed_column();
-
 
         InclusionCheckV2Chip::configure(
             meta,
@@ -39,7 +38,7 @@ impl<F: FieldExt> Circuit<F> for MyCircuit<F> {
                 col_balance_accumulator,
             ],
             instance,
-            constant
+            constant,
         )
     }
 

@@ -2,7 +2,7 @@ use arrayvec::ArrayVec;
 use eth_types::Field;
 use halo2_proofs::{circuit::*, plonk::*};
 
-use super::super::chips::safe_accumulator::{SafeACcumulatorChip, SafeAccumulatorConfig};
+use crate::chips::safe_accumulator::{SafeACcumulatorChip, SafeAccumulatorConfig};
 
 #[derive(Default)]
 struct SafeAccumulatorCircuit<F: Field> {

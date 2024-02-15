@@ -1,4 +1,4 @@
-use super::super::chips::merkle_sum_tree::{MerkleSumTreeChip, MerkleSumTreeConfig};
+use crate::chips::merkle_sum_tree::{MerkleSumTreeChip, MerkleSumTreeConfig};
 use eth_types::Field;
 use halo2_proofs::{circuit::*, plonk::*};
 use std::marker::PhantomData;
@@ -102,8 +102,8 @@ impl<F: Field> Circuit<F> for MerkleSumTreeCircuit<F> {
 mod tests {
     use crate::circuits::utils::full_prover;
 
-    use super::super::super::chips::poseidon::spec::MySpec;
     use super::MerkleSumTreeCircuit;
+    use crate::chips::poseidon::spec::MySpec;
     use halo2_gadgets::poseidon::primitives::{self as poseidon, ConstantLength};
     use halo2_proofs::{dev::MockProver, halo2curves::bn256::Fr as Fp};
     use std::marker::PhantomData;

@@ -1,14 +1,14 @@
-use super::super::chips::merkle_v3::{MerkleTreeV3Chip, MerkleTreeV3Config};
-use halo2_proofs::{circuit::*, arithmetic::FieldExt, plonk::*};
+use crate::chips::merkle_v3::{MerkleTreeV3Chip, MerkleTreeV3Config};
+use halo2_proofs::{arithmetic::FieldExt, circuit::*, plonk::*};
 
 #[derive(Default)]
-struct MerkleTreeV3Circuit <F: FieldExt>{
+struct MerkleTreeV3Circuit<F: FieldExt> {
     pub leaf: Value<F>,
     pub path_elements: Vec<Value<F>>,
     pub path_indices: Vec<Value<F>>,
 }
 
-impl <F:FieldExt> Circuit<F> for MerkleTreeV3Circuit<F> {
+impl<F: FieldExt> Circuit<F> for MerkleTreeV3Circuit<F> {
     type Config = MerkleTreeV3Config<F>;
     type FloorPlanner = SimpleFloorPlanner;
 

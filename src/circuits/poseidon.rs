@@ -1,6 +1,6 @@
-use super::super::chips::poseidon::hash_with_instance::{PoseidonChip, PoseidonConfig};
+use crate::chips::poseidon::hash_with_instance::{PoseidonChip, PoseidonConfig};
 use halo2_gadgets::poseidon::primitives::*;
-use halo2_proofs::{circuit::*, arithmetic::FieldExt, plonk::*};
+use halo2_proofs::{arithmetic::FieldExt, circuit::*, plonk::*};
 use std::marker::PhantomData;
 
 struct PoseidonCircuit<
@@ -15,8 +15,13 @@ struct PoseidonCircuit<
     _spec: PhantomData<S>,
 }
 
-impl<F:FieldExt, S: Spec<F, WIDTH, RATE>, const WIDTH: usize, const RATE: usize, const L: usize> Circuit<F>
-    for PoseidonCircuit<F, S, WIDTH, RATE, L>
+impl<
+        F: FieldExt,
+        S: Spec<F, WIDTH, RATE>,
+        const WIDTH: usize,
+        const RATE: usize,
+        const L: usize,
+    > Circuit<F> for PoseidonCircuit<F, S, WIDTH, RATE, L>
 {
     type Config = PoseidonConfig<F, WIDTH, RATE, L>;
     type FloorPlanner = SimpleFloorPlanner;
@@ -61,8 +66,8 @@ impl<F:FieldExt, S: Spec<F, WIDTH, RATE>, const WIDTH: usize, const RATE: usize,
 
 #[cfg(test)]
 mod tests {
-    use super::super::super::chips::poseidon::spec::MySpec;
     use super::PoseidonCircuit;
+    use crate::chips::poseidon::spec::MySpec;
     use halo2_gadgets::poseidon::primitives::{self as poseidon, ConstantLength};
     use halo2_proofs::{circuit::Value, dev::MockProver, halo2curves::pasta::Fp};
     use std::marker::PhantomData;
@@ -102,7 +107,7 @@ mod tests {
     #[cfg(feature = "dev-graph")]
     #[test]
     fn print_poseidon() {
-        use super::super::super::chips::poseidon::spec::MySpec;
+        use crate::chips::poseidon::spec::MySpec;
         use halo2_proofs::halo2curves::pasta::Fp;
         use plotters::prelude::*;
 

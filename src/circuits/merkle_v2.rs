@@ -1,4 +1,4 @@
-use super::super::chips::merkle_v2::{MerkleTreeV2Chip, MerkleTreeV2Config};
+use crate::chips::merkle_v2::{MerkleTreeV2Chip, MerkleTreeV2Config};
 use halo2_proofs::{arithmetic::FieldExt, circuit::*, plonk::*};
 
 #[derive(Default)]

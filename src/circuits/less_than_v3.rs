@@ -1,4 +1,4 @@
-use super::super::chips::hash_v1::{Hash1Chip, Hash1Config};
+use crate::chips::hash_v1::{Hash1Chip, Hash1Config};
 use eth_types::Field;
 use gadgets::less_than::{LtChip, LtConfig, LtInstruction};
 use std::marker::PhantomData;

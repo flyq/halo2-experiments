@@ -1,4 +1,4 @@
-use super::super::chips::hash_v2::{Hash2Chip, Hash2Config};
+use crate::chips::hash_v2::{Hash2Chip, Hash2Config};
 
 use halo2_proofs::{arithmetic::FieldExt, circuit::*, plonk::*};
 

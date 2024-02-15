@@ -1,7 +1,7 @@
 use eth_types::Field;
 use halo2_proofs::{circuit::*, plonk::*};
 
-use super::super::chips::add_carry_v1::{AddCarryChip, AddCarryConfig};
+use crate::chips::add_carry_v1::{AddCarryChip, AddCarryConfig};
 
 #[derive(Default)]
 struct AddCarryCircuit<F: Field> {
