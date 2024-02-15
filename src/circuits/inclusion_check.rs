@@ -133,8 +133,8 @@ fn print_inclusion_check() {
         .titled("Inclusion Check 1 Layout", ("sans-serif", 60))
         .unwrap();
 
-    let mut usernames: [Value<Fp>; 10] = [Value::known(Fp::from(0)); 10];
-    let mut balances: [Value<Fp>; 10] = [Value::known(Fp::from(0)); 10];
+    let usernames: [Value<Fp>; 10] = [Value::known(Fp::from(0)); 10];
+    let balances: [Value<Fp>; 10] = [Value::known(Fp::from(0)); 10];
 
     let circuit = MyCircuit::<Fp> {
         usernames,
